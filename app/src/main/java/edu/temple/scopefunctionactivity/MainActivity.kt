@@ -13,6 +13,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Log.d("function output", getTestDataArray().toString())
+        val doubleList = arrayListOf<Double>(5.0, 2.5, -1.4, 5.5, 6.6, 1.2)
+        Log.d("function output for averageLessThanMedian()", averageLessThanMedian(doubleList).toString())
         // You can test your helper functions by  calling them from onCreate() and
         // printing their output to the Log, which is visible in the LogCat:
         // eg. Log.d("function output", getTestDataArray().toString())
@@ -38,14 +40,17 @@ class MainActivity : AppCompatActivity() {
 
     // Return true if average value in list is greater than median value, false otherwise
     private fun averageLessThanMedian(listOfNumbers: List<Double>): Boolean {
-        val avg = listOfNumbers.average()
-        val sortedList = listOfNumbers.sorted()
-        val median = if (sortedList.size % 2 == 0)
-            (sortedList[sortedList.size / 2] + sortedList[(sortedList.size - 1) / 2]) / 2
+        return listOfNumbers.average() < if (listOfNumbers.size % 2 == 0)
+            (listOfNumbers.sorted()[listOfNumbers.size / 2] + listOfNumbers.sorted()[(listOfNumbers.size - 1) / 2]) / 2
         else
-            sortedList[sortedList.size / 2]
-
-        return avg < median
+            listOfNumbers.sorted()[listOfNumbers.size / 2]
+//        val avg = listOfNumbers.average()
+//        val sortedList = listOfNumbers.sorted()
+//        val median = if (sortedList.size % 2 == 0)
+//            (sortedList[sortedList.size / 2] + sortedList[(sortedList.size - 1) / 2]) / 2
+//        else
+//            sortedList[sortedList.size / 2]
+//        return avg < median
     }
 
     // Create a view from an item in a collection, but recycle if possible (similar to an AdapterView's adapter)
